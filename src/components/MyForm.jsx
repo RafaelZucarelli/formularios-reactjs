@@ -7,19 +7,33 @@ const MyForm = () => {
     // gerenciamento de dados
     const [name, setName] = useState();
     const [email, setEmail] = useState();
+
+    const [bio, setBio] = useState("");
+    
   
     //função para alterar o valor no evento OnChange
     const handleName = (e) => {
       setName(e.target.value);
     };
 
-    console.log(name)
-    console.log(email)
+    //console.log(name)
+    //console.log(email)
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      console.log("Enviando o formulário");
+      console.log(name, email, bio)
+
+      //limpar formulário
+      setName("");
+      setEmail("");
+      setBio("");
+    };
   
     return (
       <div>
         {/* - criação de form */}
-        <form>
+        <form onSubmit={handleSubmit}  >
           <h2>FORMS</h2>
           <div>
             <label htmlFor="name">Nome:</label>
@@ -38,6 +52,11 @@ const MyForm = () => {
             <input type="email" name="email" placeholder="Digite o seu e-mail:" onChange = {(e) => setEmail(e.target.value)}
             value = {email}
             />
+          </label>
+          {/* textarea */}
+          <label>
+            <span>Bio:</span>
+            <textarea name="bio" placeholder="Descrição do usuário" onChange={(e) => setBio(e.target.value)} value={bio}></textarea>
           </label>
           <input type="submit" value={"Enviar"} />
         </form>
